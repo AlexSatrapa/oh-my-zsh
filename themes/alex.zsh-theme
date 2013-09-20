@@ -1,6 +1,6 @@
 if [ $UID -eq 0 ]; then NCOLOUR="red"; else NCOLOUR="yellow"; fi
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}±"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}Δ"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
