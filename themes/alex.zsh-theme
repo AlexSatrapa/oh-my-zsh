@@ -1,15 +1,21 @@
 if [ $UID -eq 0 ]; then NCOLOUR="red"; else NCOLOUR="yellow"; fi
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}Δ"
+# get the name of the branch we are on
+function git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
+
+ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}!"
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[red]%}+"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[red]%}%"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}x"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}?"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}*"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}Δ%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[white]%}Δ%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}Δ%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[red]%}+%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[red]%}%%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}x%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}?%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}*%{$reset_color%}"
 
 ZSH_THEME_HG_PROMPT_PREFIX="%{$fg[white]%}☿"
 ZSH_THEME_HG_PROMPT_SUFFIX="%{$reset_color%}"
