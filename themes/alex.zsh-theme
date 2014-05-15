@@ -46,7 +46,7 @@ function precmd {
 	}
 
 function preexec {
-	settitle "%n@%m: %5(~:%-1~/.../%3~:%~) - $1"
+	settitle "%n@%m: %5(~:%-1~/.../%3~:%~) — $1"
 	}
 
 function accept-line-and-enable-warning {
