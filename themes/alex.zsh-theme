@@ -59,5 +59,3 @@ function accept-line-and-enable-warning {
 	fi
 	zle accept-line
 	}
-
-zle -N accept-line-and-enable-warning
