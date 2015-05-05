@@ -1,4 +1,4 @@
-if [ $UID -eq 0 ]; then NCOLOUR="red"; else NCOLOUR="yellow"; fi
+if [ $UID -eq 0 ]; then NCOLOUR="red"; else NCOLOUR="magenta"; fi
 
 # get the name of the branch we are on
 function git_prompt_info() {
@@ -35,8 +35,8 @@ RPROMPT='%{$fg[grey]%}${ZSH_THEME_EXIT_CODE}$(git_prompt_info)$(hg_prompt_info)%
 
 # See http://geoff.greer.fm/lscolors/
 #               ddllssppxxbbccuuggwwoo
-export LSCOLORS=exgxfxfxcxegedabagaead
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
+export LSCOLORS=fxexcxdxFxegedabagacad
+export LS_COLORS='di=35:ln=34:so=32:pi=33:ex=1;:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
 
 function precmd {
 	settitle "%n@%m: %5(~:%-1~/.../%3~:%~)"
@@ -56,3 +56,8 @@ function accept-line-and-enable-warning {
 	fi
 	zle accept-line
 	}
+
+zle -N accept-line-and-enable-warning
+# The accept-line-and-enable-warning feature breaks
+# when defining functions on the command line.
+# bindkey '^M' accept-line-and-enable-warning
