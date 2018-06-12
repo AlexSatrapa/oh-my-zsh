@@ -3,11 +3,11 @@ function zsh_stats() {
 }
 
 function uninstall_oh_my_zsh() {
-  env ZSH=$ZSH /bin/sh $ZSH/tools/uninstall.sh
+  env ZSH=$ZSH sh $ZSH/tools/uninstall.sh
 }
 
 function upgrade_oh_my_zsh() {
-  env ZSH=$ZSH /bin/sh $ZSH/tools/upgrade.sh
+  env ZSH=$ZSH sh $ZSH/tools/upgrade.sh
 }
 
 function take() {
@@ -25,7 +25,9 @@ function open_command() {
   case "$OSTYPE" in
     darwin*)  open_cmd='open' ;;
     cygwin*)  open_cmd='cygstart' ;;
-    linux*)   open_cmd='xdg-open' ;;
+    linux*)   [[ $(uname -a) =~ "Microsoft" ]] && \
+                open_cmd='cmd.exe /c start' || \
+                open_cmd='xdg-open' ;;
     msys*)    open_cmd='start ""' ;;
     *)        echo "Platform $OSTYPE not supported"
               return 1
@@ -86,7 +88,7 @@ function default() {
 }
 
 #
-# Set enviroment variable "$1" to default value "$2" if "$1" is not yet defined.
+# Set environment variable "$1" to default value "$2" if "$1" is not yet defined.
 #
 # Arguments:
 #    1. name - The env variable to set
