@@ -1,5 +1,5 @@
 # Uses the command-not-found package zsh support
-# as seen in http://www.porcheron.info/command-not-found-for-zsh/
+# as seen in https://www.porcheron.info/command-not-found-for-zsh/
 # this is installed in Ubuntu
 
 [[ -e /etc/zsh_command_not_found ]] && source /etc/zsh_command_not_found
@@ -21,5 +21,18 @@ if [ -f /usr/libexec/pk-command-not-found ]; then
             retval=$?
         fi
         return $retval
+    }
+fi
+
+# OSX command-not-found support
+# https://github.com/Homebrew/homebrew-command-not-found
+if [[ -s '/usr/local/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh' ]]; then
+    source '/usr/local/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh'
+fi
+
+# NixOS command-not-found support
+if [ -x /run/current-system/sw/bin/command-not-found ]; then
+    command_not_found_handler () {
+        /run/current-system/sw/bin/command-not-found $@
     }
 fi
