@@ -47,6 +47,9 @@ alias kdelp='kubectl delete pods'
 # get pod by label: kgpl "app=myapp" -n myns
 alias kgpl='kgp -l'
 
+# get pod by namespace: kgpn kube-system"
+alias kgpn='kgp -n'
+
 # Service management.
 alias kgs='kubectl get svc'
 alias kgsa='kubectl get svc --all-namespaces'
@@ -147,3 +150,13 @@ alias kepvc='kubectl edit pvc'
 alias kdpvc='kubectl describe pvc'
 alias kdelpvc='kubectl delete pvc'
 
+# Only run if the user actually has kubectl installed
+if (( $+commands[kubectl] )); then
+  kj() { kubectl "$@" -o json | jq; }
+  kjx() { kubectl "$@" -o json | fx; }
+  ky() { kubectl "$@" -o yaml | yh; }
+
+  compdef kj=kubectl
+  compdef kjx=kubectl
+  compdef ky=kubectl
+fi
