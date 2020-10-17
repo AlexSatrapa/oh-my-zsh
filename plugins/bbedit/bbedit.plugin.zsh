@@ -19,3 +19,7 @@ function bb() {
         fi
     fi
 }
+
+function bbtags() {
+   `which bbedit` --maketags . 2> /dev/null
+}
