@@ -1,4 +1,6 @@
 # Plugin owners
-plugins/gitfast/ @felipec
-plugins/sdk/ @rgoldberg
-plugins/git-lfs/ @vietduc01100001
+plugins/aws/                        @maksyms
+plugins/git-lfs/                    @vietduc01100001
+plugins/gitfast/                    @felipec
+plugins/sdk/                        @rgoldberg
+plugins/wp-cli/                     @joshmedeski
