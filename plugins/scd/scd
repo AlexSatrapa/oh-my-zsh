@@ -39,14 +39,22 @@ Options:
   -h, --help        display this message and exit.
 '
 
-local SCD_HISTFILE=${SCD_HISTFILE:-${HOME}/.scdhistory}
+if [[ -n "$XDG_CONFIG_HOME" && -d $XDG_CONFIG_HOME/scd ]]; then
+	local SCD_CONFIG_PATH=${SCD_CONFIG_PATH:-${XDG_CONFIG_HOME}/scd}
+	local SCD_HISTFILE=${SCD_HISTFILE:-${SCD_CONFIG_PATH}/scd_history}
+	local SCD_ALIAS=$SCD_CONFIG_PATH/scd_alias.zsh
+	local SCD_IGNORE=$SCD_CONFIG_PATH/scd_ignore
+else
+	local SCD_CONFIG_PATH=${SCD_CONFIG_PATH:-${HOME}}
+	local SCD_HISTFILE=${SCD_HISTFILE:-${SCD_CONFIG_PATH}/.scdhistory}
+	local SCD_ALIAS=$SCD_CONFIG_PATH/.scdalias.zsh
+	local SCD_IGNORE=$SCD_CONFIG_PATH/.scdignore
+fi
 local SCD_HISTSIZE=${SCD_HISTSIZE:-5000}
 local SCD_MENUSIZE=${SCD_MENUSIZE:-20}
 local SCD_MEANLIFE=${SCD_MEANLIFE:-86400}
 local SCD_THRESHOLD=${SCD_THRESHOLD:-0.005}
 local SCD_SCRIPT=${RUNNING_AS_COMMAND:+$SCD_SCRIPT}
-local SCD_ALIAS=~/.scdalias.zsh
-local SCD_IGNORE=~/.scdignore
 
 # Minimum logarithm of probability.  Avoids out of range warning in exp().
 local -r MINLOGPROB=-15
