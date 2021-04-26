@@ -12,6 +12,13 @@ fi
 
 
 ## Load the directory aliases created by scd if any.
-if [[ -s ~/.scdalias.zsh ]]; then
+if [[ -n "$XDG_CONFIG_HOME" && -d "$XDG_CONFIG_HOME" ]] ; then
+    if [[ ! -d "$XDG_CONFIG_HOME/scd" ]] ; then
+        mkdir "$XDG_CONFIG_HOME/scd"
+    fi
+    if [[ -s $XDG_CONFIG_HOME/scd/scd_alias.zsh ]] ; then
+        source "$XDG_CONFIG_HOME/scd/scd_alias.zsh"
+    fi
+elif [[ -s ~/.scdalias.zsh ]]; then
     source ~/.scdalias.zsh
 fi
